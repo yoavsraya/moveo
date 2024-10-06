@@ -27,7 +27,8 @@ jobs:
       # Build the React frontend
       - name: Build React App
         run: |
-          cd Front && npm run build
+          cd Front
+          CI=false npm run build
 
       # Install the Railway CLI globally
       - name: Install Railway

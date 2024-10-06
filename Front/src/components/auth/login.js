@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import './login.css';
 import { newLogin} from './DBrequests';
-import { useNavigate } from 'react-router-dom';
 
 const LoginPage = ({ onLoginSuccess }) => 
 {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    let user;
 
-    const navigate = useNavigate(); 
 
     const handleSubmit = async (event) =>
     {

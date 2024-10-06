@@ -9,7 +9,6 @@ const AdminHomePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-  const navigate = useNavigate();
 
   const handleSearch = async () => {
     if (searchQuery.trim() !== '')

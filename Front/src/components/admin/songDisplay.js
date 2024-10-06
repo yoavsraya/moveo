@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import './songDisplay.css';
 import { getSong } from './songsRequests';
 import { sendWebSocketMessage } from '../../socket';
 
 const SongDisplay = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
   const [songData, setSongData] = useState(null);
   const [instrument, setInstrument] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
