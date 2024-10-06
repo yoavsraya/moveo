@@ -3,7 +3,7 @@ name: Build and deploy Node.js app to AWS Web App
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
 
 jobs:
