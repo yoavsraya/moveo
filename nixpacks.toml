@@ -1,0 +1,19 @@
+[variables]
+    NPM_CONFIG_UPDATE_NOTIFIER = 'false'
+    NPM_CONFIG_FUND = 'false'
+
+# Step 1: Install backend dependencies and build the backend
+[phases.server]
+    cmds = ['cd Server && npm install']
+
+# Step 2: Install frontend dependencies and build the frontend
+[phases.frontend]
+    dependsOn = ['server']
+    cmds = ['cd Front && npm install && npm run build']
+
+# Step 3: Start both backend (Node.js) and frontend (React)
+[start]
+    cmd = '''
+    pm2 start Server --name "Server" -- run start
+    pm2 start Front --name "React" -- run start
+    '''
