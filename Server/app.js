@@ -1,3 +1,8 @@
+// Polyfill fetch for Node.js v16
+global.fetch = require('node-fetch');
+
+// Polyfill ReadableStream for Node.js v16
+global.ReadableStream = require('web-streams-polyfill').ReadableStream;
 //local npm
 const path = require('path');
 
