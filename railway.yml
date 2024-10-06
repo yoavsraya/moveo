@@ -1,7 +1,0 @@
-services:
-  - name: web
-    buildCommand: nixpacks build .
-    startCommand: nixpacks run .
-    envVars:
-      NODE_ENV: production
-      PORT: 3000
