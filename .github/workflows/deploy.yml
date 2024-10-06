@@ -27,7 +27,7 @@ jobs:
           cd Server
           npm install
       - name: Deploy Backend to Railway
-        run: railway up --service backend-service
+        run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
@@ -38,6 +38,6 @@ jobs:
           npm install
           npm run build
       - name: Deploy Frontend to Railway
-        run: railway up --service frontend-service
+        run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
