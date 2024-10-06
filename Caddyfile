@@ -10,15 +10,22 @@
     }
 }
 
+# Serve the React frontend
 :{$PORT} {
     log {
         format json
     }
 
-    rewrite /health /*
-
-    root * build
+    # Serve the React app from the 'build' directory
+    root * Front/build
     encode gzip
     file_server
     try_files {path} /index.html
+
+    # Proxy API requests to the Node.js server
+    @api {
+        path /api/*
+    }
+
+    reverse_proxy @api localhost:3000
 }
