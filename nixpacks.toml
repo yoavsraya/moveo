@@ -1,19 +1,18 @@
 # Nixpacks configuration file
 
-[phases]
-  # Phase to install dependencies for the backend (Server)
-  install = '''
-  cd Server && npm install
-  cd ../Front && npm install
-  '''
+[phases.install]
+# Commands to install dependencies for both the backend (Server) and frontend (Front)
+commands = [
+  "cd Server && npm install",
+  "cd ../Front && npm install"
+]
 
-  # Phase to build the frontend (Front)
-  build = '''
-  cd Front && npm run build
-  '''
+[phases.build]
+# Command to build the frontend (React app in the Front directory)
+commands = [
+  "cd Front && npm run build"
+]
 
 [start]
-  # Start backend and serve frontend
-  cmd = '''
-  cd Server && npm start
-  '''
+# Command to start the backend (Server) which also serves the built frontend files
+cmd = "cd Server && npm start"
