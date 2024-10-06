@@ -1,19 +1,23 @@
-[variables]
-    NPM_CONFIG_UPDATE_NOTIFIER = 'false'
-    NPM_CONFIG_FUND = 'false'
+# Nixpacks configuration
 
-# Step 1: Install backend dependencies and build the backend
-[phases.server]
-    cmds = ['cd Server && npm install']
+[phases]
 
-# Step 2: Install frontend dependencies and build the frontend
+# Backend (Node.js server)
+[phases.backend]
+  cmds = [
+    "cd Server && npm install"
+  ]
+
+# Frontend (React app)
 [phases.frontend]
-    dependsOn = ['server']
-    cmds = ['cd Front && npm install && npm run build']
+  dependsOn = ["backend"]
+  cmds = [
+    "cd Front && npm install && npm run build"
+  ]
 
-# Step 3: Start both backend (Node.js) and frontend (React)
+# Start both backend and frontend
 [start]
-    cmd = '''
-    pm2 start Server --name "Server" -- run start
-    pm2 start Front --name "React" -- run start
-    '''
+  cmds = [
+    "pm2 start Server --name 'Server' -- run start",
+    "cd Front && pm2 start npm --name 'React' -- run start"
+  ]
