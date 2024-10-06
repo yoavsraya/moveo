@@ -2,7 +2,7 @@ name: Deploy to Railway
 
 on:
   push:
-    branches: [main]  # Trigger on main branch or another branch
+    branches: [main]  # Change to your preferred branch
 
 jobs:
   deploy:
@@ -11,29 +11,32 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Use Node 16
+      # Set up Node.js (for both backend and frontend)
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16.x
+          node-version: '16'  # Set your desired Node.js version
 
-      # Install and build backend (Node.js)
+      # Install Railway CLI
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      # Install backend dependencies and deploy backend
       - name: Install Backend Dependencies
         run: |
           cd Server
           npm install
-
       - name: Deploy Backend to Railway
         run: railway up --service backend-service
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
-      # Install and build frontend (React)
+      # Install frontend dependencies and deploy frontend
       - name: Install Frontend Dependencies
         run: |
           cd Front
           npm install
           npm run build
-
       - name: Deploy Frontend to Railway
         run: railway up --service frontend-service
         env:
