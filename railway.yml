@@ -1,18 +1,7 @@
 services:
-  - name: server
-    buildCommand: |
-      cd Server && npm install
-    startCommand: |
-      cd Server && npm run start
+  - name: web
+    buildCommand: docker build . -t my-app
+    startCommand: docker run -p 3000:3000 my-app
     envVars:
       NODE_ENV: production
       PORT: 3000 # Backend app port
-
-  - name: front
-    buildCommand: |
-      cd Front && npm install && npm run build
-    startCommand: |
-      cd Front && npm install && npm run start
-    envVars:
-      NODE_ENV: production
-      PORT: 5001 # Frontend app port
