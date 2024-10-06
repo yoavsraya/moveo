@@ -1,0 +1,22 @@
+# Nixpacks configuration file
+
+[phases.setup]
+# Install Node.js and npm via Nix packages
+nixPkgs = ["nodejs-16_x", "npm"]
+
+[phases.install]
+# Install dependencies for both Server and Front
+commands = [
+  "cd Server && npm install",
+  "cd ../Front && npm install"
+]
+
+[phases.build]
+# Build the frontend React app
+commands = [
+  "cd Front && npm run build"
+]
+
+[start]
+# Start the backend Node.js server
+cmd = "cd Server && npm start"
