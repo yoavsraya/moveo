@@ -1,0 +1,19 @@
+# Nixpacks configuration file
+
+[phases]
+  # Phase to install dependencies for the backend (Server)
+  install = '''
+  cd Server && npm install
+  cd ../Front && npm install
+  '''
+
+  # Phase to build the frontend (Front)
+  build = '''
+  cd Front && npm run build
+  '''
+
+[start]
+  # Start backend and serve frontend
+  cmd = '''
+  cd Server && npm start
+  '''
