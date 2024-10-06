@@ -1,0 +1,53 @@
+/* Basic styling for the header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Left section (Home button) */
+  .left-section .home-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  /* Right section (Login and Sign In buttons) */
+  .right-section {
+    display: flex;
+    gap: 15px; 
+  }
+  
+  .right-section .login-btn,
+  .right-section .logout-btn,
+  .right-section .signin-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: auto;
+  }
+  
+  .right-section .login-btn {
+    background-color: #6c757d; 
+  }
+
+    .right-section .logout-btn {
+        background-color: #de5e6b;
+    }
+  
+  .home-btn:hover,
+  .logout-btn:hover,
+  .login-btn:hover,
+  .signin-btn:hover {
+    opacity: 0.9;
+  }
+  

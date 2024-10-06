@@ -1,0 +1,28 @@
+services:
+  - name: web
+    buildCommand: |
+      cd Server && npm install
+      cd ../ && cd Front && npm install
+    startCommand: |
+      set -x
+      # Start Node.js backend
+      cd ../ && cd Server
+      if pm2 describe Server | grep -q 'online\|stopped'
+      then
+        pm2 restart Server
+      else
+        pm2 start npm --name "Server" -- run start
+      fi
+
+      # Start React frontend
+      cd ../ && cd Front
+      export PORT=5001  # Specify a port for React app
+      if pm2 describe React | grep -q 'online\|stopped'
+      then
+        pm2 restart React
+      else
+        pm2 start npm --name "React" -- run start
+      fi
+    envVars:
+      NODE_ENV: production
+      PORT: 3000 # Node.js app port (use any other port if needed)

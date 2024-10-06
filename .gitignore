@@ -1,0 +1,55 @@
+# Node modules
+node_modules/
+Front/node_modules
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+
+# Logs
+logs/
+*.log
+*.log.*
+log/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+*.swp
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE-specific files (for VS Code, JetBrains, etc.)
+.vscode/
+.idea/
+*.suo
+*.ntvs
+*.njsproj
+*.sln
+
+# Build directories (for projects with build steps)
+dist/
+build/
+out/
+
+# Coverage reports (for testing)
+coverage/
+*.lcov
+
+# Temporary files
+.tmp/
+.temp/
+
+# Mac-specific metadata
+.DS_Store
+
+# Package-lock and yarn.lock (if you only want one lock file)
+# This helps when collaborating with teams to avoid conflicts.
+# If you're using npm, include this line:
+yarn.lock
+# If you're using Yarn, include this line:
+package-lock.json

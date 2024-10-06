@@ -1,0 +1,57 @@
+.song-display {
+  white-space: pre-wrap;
+  font-family: monospace;
+  color: black;
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-sizing: border-box; /* Ensure padding is included in the total size */
+  position: relative;
+  text-align: center;
+  }
+  
+  .song-line {
+    margin-bottom: 10px;
+    white-space: pre; /* Preserve spaces and formatting */
+  }
+  
+  .chords {
+    color: blue;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .lyrics {
+    color: black;
+  }
+
+  .play-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    
+  }
+
+  .play-button-img {
+    width: 1.5rem; 
+    height: 1.5rem; 
+    object-fit: contain; 
+    background-color: white;
+  }
+
+  .admin-button {
+    background-color: rgb(206, 16, 16); /* Make the button red */
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; /* Optional: Add rounded corners */
+  }
+  
+  .admin-button:hover {
+    background-color: darkred; /* Darker red on hover */
+  }

@@ -1,0 +1,6 @@
+.centered-containe {
+    display: flex;
+    justify-content: center; /* Horizontally centers the content */
+    text-align: center; /* Vertically centers the content */
+    height: 100vh; /* Sets the height of the container to 100% of the viewport height */
+  }
