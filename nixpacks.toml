@@ -1,19 +1,17 @@
 # Nixpacks configuration file
 
-[phases.install]
-# Install Node.js and npm
-pkgs = ["nodejs", "npm"]
-commands = [
-  "cd Server && npm install",
-  "cd ../Front && npm install"
-]
-
-[phases.build]
-# Build the frontend (React app in Front directory)
-commands = [
-  "cd Front && npm run build"
-]
+[phases]
+  install = '''
+  cd Server && npm install
+  cd ../Front && npm install
+  '''
+  build = '''
+  cd Front && npm run build
+  '''
 
 [start]
-# Start the backend (Server)
-cmd = "cd Server && npm start"
+  cmd = "cd Server && npm start"
+
+[pkgs]
+  # Specify Node.js and npm as required packages
+  pkgs = ["nodejs", "npm"]
