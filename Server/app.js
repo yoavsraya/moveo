@@ -5,6 +5,7 @@ global.fetch = require('node-fetch');
 global.ReadableStream = require('web-streams-polyfill').ReadableStream;
 //local npm
 const path = require('path');
+const http = require('http');
 
 //files import
 const connectDB = require('./util/dataBase');
@@ -22,7 +23,8 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const cors = require('cors');
 
 const app = express();
-socket.connectWebSocket();
+const server = http.createServer(app);
+socket.connectWebSocket(server);
 
 const store = new MongoDBStore({
     uri: 'mongodb+srv://server:Server1234@moveodatabase.x2lcn.mongodb.net/moveoDataBase?retryWrites=true&w=majority&appName=moveoDataBase',
@@ -31,7 +33,7 @@ const store = new MongoDBStore({
 
 //
 app.use(cors({
-    origin: 'http://localhost:5001', // Replace with your frontend URL
+    origin: 'http://184.73.72.205:5000', // Replace with your frontend URL
     credentials: true // This allows cookies and sessions to be sent
 }));
 
@@ -60,5 +62,7 @@ app.use(socketRoutes);
 app.use((req,res,next) => {res.status(404)});
 
 connectDB.connectDB(() => {
-    app.listen(3000); 
+    server.listen(3000, () => {
+        console.log('Server is running on port 3000');
+    });
 });

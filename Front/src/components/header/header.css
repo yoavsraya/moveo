@@ -8,7 +8,6 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  /* Left section (Home button) */
   .left-section .home-btn {
     background-color: #007bff;
     color: white;
@@ -18,7 +17,7 @@
     border-radius: 5px;
   }
   
-  /* Right section (Login and Sign In buttons) */
+  
   .right-section {
     display: flex;
     gap: 15px; 
@@ -26,7 +25,7 @@
   
   .right-section .login-btn,
   .right-section .logout-btn,
-  .right-section .signin-btn {
+  .right-section .signup-btn {
     background-color: #28a745;
     color: white;
     border: none;
@@ -47,7 +46,7 @@
   .home-btn:hover,
   .logout-btn:hover,
   .login-btn:hover,
-  .signin-btn:hover {
+  .signup-btn:hover {
     opacity: 0.9;
   }
   

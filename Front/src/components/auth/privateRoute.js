@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { checkSession } from './DBrequests';
 
+//handle all the private routing in the app 
 const PrivateRoute = ({ children , route = null}) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -14,8 +15,6 @@ const PrivateRoute = ({ children , route = null}) => {
       setIsAuthenticated(sessionData.isLoggedIn);
       setIsAdmin(sessionData.user?.admin || false);
       setIsSessionChecked(true);
-      localStorage.setItem('isAdmin', sessionData.user?.admin || false);
-      localStorage.setItem('instrument', sessionData.user?.instrument || null);
     });
   }, []);
 

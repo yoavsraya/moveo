@@ -10,7 +10,7 @@ const AdminHomePage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
 
-  const handleSearch = async () => {
+  const handleSearch = async () => { //sending serach Qurey
     if (searchQuery.trim() !== '')
     {
       setIsSearching(true);
@@ -20,7 +20,7 @@ const AdminHomePage = () => {
     }
   };
 
-  const handleSongSelect = async (song) => {
+  const handleSongSelect = async (song) => { //after song selected, get song and announce all
     const songData = await getLyricsAndChords(song.songLink);
     console.log('songData:', songData);
     
@@ -35,7 +35,7 @@ const AdminHomePage = () => {
     }
     setTimeout(() =>
     {
-      const randomNumber = Math.floor(Math.random() * 9000) + 1000;
+      const randomNumber = Math.floor(Math.random() * 9000) + 1000; // create session id
     sendWebSocketMessage({ action: 'redirect', url: `/live?sessionId=${randomNumber}`}); 
     }, 1000);
     
@@ -53,7 +53,6 @@ const AdminHomePage = () => {
         />
         <button onClick={handleSearch}>Search</button>
 
-        {/* Render SongList after search */}
         {isSearching && searchResults.length > 0 && (
           <SongList songs={searchResults} onSongSelect={handleSongSelect} />
         )}

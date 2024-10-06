@@ -1,13 +1,15 @@
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/header/header';
 import LoginPage from './components/auth/login';
-import SignInPage from './components/auth/sign-in';
+import SignUpPage from './components/auth/sign-up';
 import HomePage from './components/home/home';
 import AdminPage from './components/admin/admin';
 import PrivateRoute from './components/auth/privateRoute';
 import SongDisplay from './components/admin/songDisplay';
 import { connectWebSocket, closeWebSocket } from './socket';
 
+
+//control of all the routes
 import { useState, useEffect, useRef} from 'react';
 
 function AppRoutes() {
@@ -29,16 +31,14 @@ function AppRoutes() {
       {
         if(message.url == '/')
         {
+          console.log('end of live')
           localStorage.removeItem('songData');
-          localStorage.removeItem('isAdmin');
-          localStorage.removeItem('instrument');
         }
         console.log('Redirecting to:', message.url);
         Navigate(message.url);
       }
     };
 
-    // Connect to WebSocket if authenticated and WebSocket is not already connected
     if (isAuthenticated && !socketRef.current) {
       socketRef.current = connectWebSocket(handleWebSocketMessage);  // Connect WebSocket
       console.log('WebSocket connection established for authenticated user.');
@@ -55,11 +55,10 @@ function AppRoutes() {
 
   const handleLogOutSuccess = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem('isAuthenticated');
+    localStorage.clear();
     Navigate('/login');
     if (socketRef.current) {
       closeWebSocket(); 
-      localStorage.clear();
       console.log('WebSocket connection closed.');
       socketRef.current = null;
     }
@@ -69,7 +68,7 @@ function AppRoutes() {
     <>
       <Header isAuthenticated={isAuthenticated} onLogOutSuccess={handleLogOutSuccess}/>
       <Routes>
-        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
         <Route
           path="/login"
           element={

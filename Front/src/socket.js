@@ -7,9 +7,13 @@ export const connectWebSocket = (onMessageCallback) => {
         
         if(!wsConnected || ws === null || ws.readyState === WebSocket.CLOSED)
         {
-            ws = new WebSocket('ws://localhost:8081');
-            localStorage.setItem('wsConnected', true);
+            ws = new WebSocket('ws://184.73.72.205:3000');
         }
+
+        ws.onopen = () => {
+          console.log('WebSocket connection successfully established!');
+          localStorage.setItem('wsConnected', true); 
+        };
 
         ws.onmessage = (event) =>
             {
@@ -46,8 +50,9 @@ export const closeWebSocket = () => {
 };
 
 export const sendWebSocketMessage = (message) => {
-  if (ws) {
-    ws.send(JSON.stringify(message));
+  if (ws && ws.readyState === WebSocket.OPEN)
+  {
     console.log('WebSocket sent message:', message);
+    ws.send(JSON.stringify(message));
   }
 };

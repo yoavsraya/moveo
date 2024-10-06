@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
-exports.POSTSignIn = (req, res, next) => {
+exports.POSTSignUp = (req, res, next) => {
     const userName = req.body.userName;
     const password = req.body.password;
     const instrument = req.body.instrument;

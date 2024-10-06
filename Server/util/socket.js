@@ -1,7 +1,9 @@
 const WebSocket = require('ws');
+
 let song;
-exports.connectWebSocket = () => {
-const wss = new WebSocket.Server({ port: 8081 });  // Example: Running on port 8080
+
+exports.connectWebSocket = (server) => {
+  const wss = new WebSocket.Server({server});  
 
 wss.on('connection', (ws) => {
   console.log('New client connected');

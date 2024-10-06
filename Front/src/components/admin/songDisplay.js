@@ -3,12 +3,12 @@ import './songDisplay.css';
 import { getSong } from './songsRequests';
 import { sendWebSocketMessage } from '../../socket';
 
-const SongDisplay = () => {
+const SongDisplay = () => { //live page
   const [songData, setSongData] = useState(null);
   const [instrument, setInstrument] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false); // Track whether auto-scrolling is active
-  const [scrollInterval, setScrollInterval] = useState(null); // Track the scrolling interval
+  const [scrollInterval, setScrollInterval] = useState(null); // Track the scrolling
 
   useEffect(() => {
     const Data = localStorage.getItem('songData');
@@ -18,12 +18,12 @@ const SongDisplay = () => {
     } else {
       const fetchSongData = async () => {
         try {
-          const response = await getSong();
+          const response = await getSong(); //get selectes song by admin
           const data = response.data;
           console.log('data:', data.song);
           if (data.song) {
             setSongData(data.song);
-            localStorage.setItem('songData', JSON.stringify(data.song));
+            localStorage.setItem('songData', JSON.stringify(data.song)); // store the song for refresh and more..
             console.log('No song data available, redirecting...');
             //navigate('/');
           }
@@ -45,13 +45,13 @@ const SongDisplay = () => {
 
     return () => {
       if (scrollInterval) {
-        clearInterval(scrollInterval); // Cleanup the interval when component unmounts
+        clearInterval(scrollInterval); 
       }
     };
   }, [scrollInterval]);
 
   const handleSendMessage = () => {
-    sendWebSocketMessage({ action: 'redirect', url: `/` });
+    sendWebSocketMessage({ action: 'redirect', url: `/` }); // quit button has been push. live ended 
   };
 
   const toggleScrolling = () => {
@@ -60,9 +60,8 @@ const SongDisplay = () => {
       setScrollInterval(null);
       setIsScrolling(false);
     } else {
-      // Start slow scrolling
       const interval = setInterval(() => {
-        window.scrollBy(0, 1); // Scroll down by 1 pixel every 50 milliseconds
+        window.scrollBy(0, 1); 
       }, 50);
       setScrollInterval(interval);
       setIsScrolling(true);
@@ -73,7 +72,6 @@ const SongDisplay = () => {
     return <div>Loading...</div>;
   }
 
-  // If songData is valid, render it
   return (
     <div className="song-display">
       <h1 className="song-name">{songData.songName}</h1>
@@ -81,7 +79,7 @@ const SongDisplay = () => {
       {songData.song && Array.isArray(songData.song) ? (
         songData.song.map((line, index) => (
           <div key={index} className="line-wrapper">
-            {instrument !== 'singer' && line.chords && (
+            {instrument !== 'singer' && line.chords && ( // if singer upload only lyrics
               <div className="chords">{line.chords}</div>
             )}
             {line.lyrics && <div className="lyrics">{line.lyrics}</div>}

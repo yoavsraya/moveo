@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/login', authController.POSTLogin);
 
-router.post('/sign-in', authController.POSTSignIn);
+router.post('/sign-up', authController.POSTSignUp);
 
 router.get('/check-auth', authController.GETCheckAuth);
 

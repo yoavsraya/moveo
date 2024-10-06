@@ -2,17 +2,17 @@
   white-space: pre-wrap;
   font-family: monospace;
   color: black;
-  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-y: auto; 
   border: 1px solid #ddd;
   padding: 20px;
-  box-sizing: border-box; /* Ensure padding is included in the total size */
+  box-sizing: border-box; 
   position: relative;
   text-align: center;
   }
   
   .song-line {
     margin-bottom: 10px;
-    white-space: pre; /* Preserve spaces and formatting */
+    white-space: pre; 
   }
   
   .chords {
@@ -43,15 +43,15 @@
   }
 
   .admin-button {
-    background-color: rgb(206, 16, 16); /* Make the button red */
+    background-color: rgb(206, 16, 16); 
     color: white;
     padding: 10px 20px;
     margin-top: 20px;
     border: none;
     cursor: pointer;
-    border-radius: 5px; /* Optional: Add rounded corners */
+    border-radius: 5px; 
   }
   
   .admin-button:hover {
-    background-color: darkred; /* Darker red on hover */
+    background-color: darkred; 
   }

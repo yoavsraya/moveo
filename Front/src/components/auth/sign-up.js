@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './sign-in.css'; 
+import './sign-up.css'; 
 import { useNavigate , useLocation } from 'react-router-dom';
-import { newSignIn} from './DBrequests';
+import { newSignUp} from './DBrequests';
 
-const SignInPage = () => {
+const SignUpPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -13,7 +13,7 @@ const SignInPage = () => {
     const location = useLocation();
     let isAdmin = false;
     const queryParams = new URLSearchParams(location.search);
-    isAdmin = queryParams.get('admin') == '1234';
+    isAdmin = queryParams.get('admin') == '1234'; // for admin sign up
 
     const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,7 +27,7 @@ const SignInPage = () => {
 
     try 
     {
-        const result = await newSignIn(username, password, instrument, isAdmin)
+        const result = await newSignUp(username, password, instrument, isAdmin)
         if (result.error)
         {
             alert(result.message);
@@ -39,15 +39,15 @@ const SignInPage = () => {
     }
     catch (error) 
     {
-        console.error('Error during sign in:', error);
+        console.error('Error during sign up:', error);
         alert('Something went wrong. Please try again later.');
     }
     };
 
 return (
-    <div className="signin-container">
-      <form className="signin-form" onSubmit={handleSubmit}>
-        <h2>Sign In</h2>
+    <div className="signup-container">
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <h2>Sign Up</h2>
         {isAdmin && <p style={{ color: 'red', fontWeight: 'bold' }}>Admin</p>}
         <div className="form-group">
           <label htmlFor="username">Username</label>
@@ -93,10 +93,10 @@ return (
           />
         </div>
 
-        <button type="submit" className="signin-btn">Sign In</button>
+        <button type="submit" className="signup-btn">Sign Up</button>
       </form>
     </div>
   );
 };
 
-export default SignInPage;
+export default SignUpPage;

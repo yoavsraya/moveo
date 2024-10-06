@@ -15,11 +15,19 @@ const Header = ({onLogOutSuccess, isAuthenticated}) => {
 
     // Handle navigation
     const handleNavigation = (path) => {
+        const currentLocation = window.location.href;
+        if (currentLocation.startsWith('http://184.73.72.205:5000/live')) { //when live button off
+            return; // Exit the function without navigating
+        }
         navigate(path);
     };
 
     // Handle logout
     const handleLogout = () => {
+        const currentLocation = window.location.href;
+        if (currentLocation.startsWith('http://184.73.72.205:5000/live')) { //when live button off
+            return;
+        }
         logoutSession() 
             .then(() => {
                 console.log("Logout successful");
@@ -38,12 +46,12 @@ const Header = ({onLogOutSuccess, isAuthenticated}) => {
             <div className="right-section">
                 {isLoggedIn ? (
                     
-                    <button className="logout-btn" onClick={handleLogout}> Logout </button>
+                    <button className="logout-btn" onClick={handleLogout}> Logout </button> //if login show logout 
                 ) : (
-                    // Show login and sign-in buttons if user is not logged in
+                    // Show login and sign-up buttons if user is not logged in
                     <>
                         <button className="login-btn" onClick={() => handleNavigation('/login')}>Login</button>
-                        <button className="signin-btn" onClick={() => handleNavigation('/sign-in')}>Sign In</button>
+                        <button className="signup-btn" onClick={() => handleNavigation('/sign-up')}>Sign Up</button>
                     </>
                 )}
             </div>

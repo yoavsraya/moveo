@@ -1,17 +1,18 @@
 import axios from 'axios';
-
-export const newSignIn = async (i_username, i_password, i_instrument, i_admin) =>
+//dor sending all the req to the server
+export const newSignUp = async (i_username, i_password, i_instrument, i_admin) =>
 {
-    console.log('Signing in with:', { i_username, i_password, i_instrument, i_admin });
+    console.log('Signing up with:', { i_username, i_password, i_instrument, i_admin });
     try
     {
-        const response = await axios.post('http://localhost:3000/sign-in',
+        const response = await axios.post('http://184.73.72.205:3000/sign-up',
         {
             userName: i_username,
             password: i_password,
             instrument: i_instrument,
             isAdmin: i_admin
         })
+        
         return { error: false, message: response.data };
     }
 
@@ -19,7 +20,7 @@ export const newSignIn = async (i_username, i_password, i_instrument, i_admin) =
     {
         if (error.response && error.response.status === 400)
         {
-            console.log('sign in as error', error.response.data.message);
+            console.log('sign up as error', error.response.data.message);
             return { error: true, message: error.response.data.message };
         }
         else
@@ -36,14 +37,15 @@ export const newLogin = async (i_username, i_password) =>
     console.log('Logging in with:', { i_username, i_password });
     try
     {
-        const response = await axios.post('http://localhost:3000/login',
+        const response = await axios.post('http://184.73.72.205:3000/login',
         {
             userName: i_username,
             password: i_password
         },
         { withCredentials: true }
     )
-        console.log('3000/login as return');
+        localStorage.setItem('isAdmin', response.data.user.admin);
+        localStorage.setItem('instrument',response.data.user.instrument);
         return { error: false, message: response.message , user: response.data.user};
     }
 
@@ -66,7 +68,7 @@ export const newLogin = async (i_username, i_password) =>
 export const checkSession = async () => {
     try 
     {
-        const response = await axios.get('http://localhost:3000/check-auth', { withCredentials: true });
+        const response = await axios.get('http://184.73.72.205:3000/check-auth', { withCredentials: true });
         return response.data;
     }
     catch (error)
@@ -79,7 +81,7 @@ export const checkSession = async () => {
   export const checkAdmin = async () => {
     try 
     {
-        const response = await axios.get('http://localhost:3000/admin-check', { withCredentials: true });
+        const response = await axios.get('http://184.73.72.205:3000/admin-check', { withCredentials: true });
         return response.data;
     }
     catch (error)
@@ -91,7 +93,7 @@ export const checkSession = async () => {
 
   export const logoutSession = async () => {
     try {
-        const response = await axios.post('http://localhost:3000/logout', {}, { withCredentials: true });
+        const response = await axios.post('http://184.73.72.205:3000/logout', {}, { withCredentials: true });
         console.log('logout as response:', response.data);
         return response.data;
     } catch (error) {
