@@ -31,7 +31,8 @@ const store = new MongoDBStore({
     collection: 'sessions', 
 });
 
-//
+
+
 app.use(cors({
     origin: 'http://184.73.72.205:5000', // Replace with your frontend URL
     credentials: true // This allows cookies and sessions to be sent
