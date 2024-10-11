@@ -30,7 +30,7 @@ const store = new MongoDBStore({
     uri: 'mongodb+srv://server:Server1234@moveodatabase.x2lcn.mongodb.net/moveoDataBase?retryWrites=true&w=majority&appName=moveoDataBase',
     collection: 'sessions', 
 });
-//geting all from 5000
+//listen in 5000
 app.use(cors({
     origin: 'http://184.73.72.205:5000', // Replace with your frontend URL
     credentials: true // This allows cookies and sessions to be sent
