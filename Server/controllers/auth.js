@@ -14,7 +14,7 @@ exports.POSTSignUp = (req, res, next) => {
         return bcrypt.hash(password, 12)
         .then(hashedPassword => {
             const user = new User(userName, hashedPassword, instrument , isAdmin);
-            return user.save()
+            return user.save() // move to next then block
             .then(savedUser => {
                 // Return the saved user back to the client, excluding sensitive information like the password
                 res.status(201).json(
@@ -78,7 +78,8 @@ exports.POSTLogin = (req, res, next) => {
       });
   };
 
-  exports.GETCheckAdmin = (req, res) =>
+//
+exports.GETCheckAdmin = (req, res) =>
     {
         if (req.session.user.isAdmin) {
             res.status(200).json({ isAdmin: true, user: req.session.user });
@@ -96,17 +97,17 @@ exports.GETCheckAuth = (req, res) =>
         }
     };
 
-    exports.POSTLogout = (req, res) => 
+exports.POSTLogout = (req, res) => 
+    {
+        console.log('Logging out');
+        req.session.destroy(err =>
         {
-            console.log('Logging out');
-            req.session.destroy(err =>
+            if (err)
             {
-                if (err)
-                {
-                    return res.status(500).json({ message: 'Logout failed' });
-                }
-                res.status(200).json({ message: 'Logout successful' });
-            });
-        };
+                return res.status(500).json({ message: 'Logout failed' });
+            }
+            res.status(200).json({ message: 'Logout successful' });
+        });
+    };
 
 

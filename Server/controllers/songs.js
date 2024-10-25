@@ -1,5 +1,5 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+const axios = require('axios'); //for sending HTTP requests
+const cheerio = require('cheerio'); //for parsing HTML
 
 exports.GETsearchList = async (req, res) => {
     const query = req.query.q;
@@ -38,7 +38,8 @@ exports.GETchordAndLyrics = async (req, res) => {
     }
 }
 
-async function getLyricsAndChords(songUrl) {
+async function getLyricsAndChords(songUrl)
+{
     try {
         console.log('Fetching song data from:', songUrl);
         const response = await axios.get(songUrl);
@@ -106,8 +107,7 @@ async function searchSong(query) {
             const linkElement = $(element).find('a.ruSongLink');
             const songName = $(element).find('div.sNameI19').text().trim().replace(/\s\/$/, '');
             const artistName = $(element).find('div.aNameI19').text().trim();
-            const songLink = `https://www.tab4u.com/${linkElement.attr('href')}`;
-            
+            const songLink = `https://www.tab4u.com/${linkElement.attr('href')}`; //extract the link from the href attribute
             songs.push({ songName, artistName, songLink });
         });
 
