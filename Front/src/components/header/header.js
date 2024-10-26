@@ -14,10 +14,10 @@ const Header = ({onLogOutSuccess, isAuthenticated}) => {
     }, [isAuthenticated]);
 
     // Handle navigation
-    const handleNavigation = (path) => {
+    const handleNavigation = (path) => { //when is live, no redirection allowed
         const currentLocation = window.location.href;
-        if (currentLocation.startsWith('http://184.73.72.205:5000/live')) { //when live button off
-            return; // Exit the function without navigating
+        if (currentLocation.startsWith('http://184.73.72.205:5000/live')) { 
+            return; 
         }
         navigate(path);
     };

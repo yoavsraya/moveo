@@ -14,7 +14,7 @@ const LoginPage = ({ onLoginSuccess }) =>
         console.log('Logging in with:', { username, password });
         try 
         {
-            const result = await newLogin(username, password); // try to login
+            const result = await newLogin(username, password); //TODO: newLogin need to return promises
             console.log('result:', result);
             if (result.error)
             {

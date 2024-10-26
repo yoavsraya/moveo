@@ -4,7 +4,7 @@ import './songList.css';
 const SongList = ({ songs, onSongSelect }) => {
   return (
     <div className="song-list">
-      {songs.map((song, index) => (
+      {songs.map((song, index) => ( // using map to iterate all the songs like using for each 
         <div 
           key={index} 
           className="song-item" 

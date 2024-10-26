@@ -12,22 +12,26 @@ const SongDisplay = () => { //live page
 
   useEffect(() => {
     const Data = localStorage.getItem('songData');
-    if (Data) {
+    if (Data) // if data saved in the local storage
+    {
       setSongData(JSON.parse(Data));
-      console.log('songData from the storage:', JSON.parse(Data));
-    } else {
+    }
+    else
+    {
       const fetchSongData = async () => {
-        try {
-          const response = await getSong(); //get selectes song by admin
+        try
+        {
+          const response = await getSong(); //get selected song by admin
           const data = response.data;
           console.log('data:', data.song);
-          if (data.song) {
+          if (data.song)
+          {
             setSongData(data.song);
-            localStorage.setItem('songData', JSON.stringify(data.song)); // store the song for refresh and more..
-            console.log('No song data available, redirecting...');
-            //navigate('/');
+            localStorage.setItem('songData', JSON.stringify(data.song)); // store the song for refresh and more.
           }
-        } catch (error) {
+        }
+        catch (error) 
+        {
           console.error('Error fetching song data:', error);
           //navigate('/');
         }
@@ -36,14 +40,15 @@ const SongDisplay = () => { //live page
       fetchSongData();
     }
 
-    const adminStatus = localStorage.getItem('isAdmin');
-    if (adminStatus === 'true') {
+    const adminStatus = localStorage.getItem('isAdmin'); // check if admin for button
+    if (adminStatus === 'true')
+    {
       setIsAdmin(true);
     }
 
-    setInstrument(localStorage.getItem('instrument'));
+    setInstrument(localStorage.getItem('instrument')); // check if it is singer or not
 
-    return () => {
+    return () => { //clean up function 
       if (scrollInterval) {
         clearInterval(scrollInterval); 
       }
@@ -76,7 +81,8 @@ const SongDisplay = () => { //live page
     <div className="song-display">
       <h1 className="song-name">{songData.songName}</h1>
       <h3 className="song-artist">{songData.artistName}</h3>
-      {songData.song && Array.isArray(songData.song) ? (
+      {songData.song && Array.isArray(songData.song) ?
+      (
         songData.song.map((line, index) => (
           <div key={index} className="line-wrapper">
             {instrument !== 'singer' && line.chords && ( // if singer upload only lyrics
@@ -85,7 +91,9 @@ const SongDisplay = () => { //live page
             {line.lyrics && <div className="lyrics">{line.lyrics}</div>}
           </div>
         ))
-      ) : (
+      )
+      :
+      (
         <div>No song lines available</div>
       )}
 

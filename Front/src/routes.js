@@ -15,18 +15,19 @@ import { useState, useEffect, useRef} from 'react';
 function AppRoutes() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const Navigate = useNavigate();
-  const socketRef = useRef(null);
+  const socketRef = useRef(null); //to avoid multi connection to the websocket
 
   useEffect(() => {  // Check authentication state
     const authState = localStorage.getItem('isAuthenticated');
-    if (authState === 'true') {
+    if (authState === 'true')
+    {
       setIsAuthenticated(true);
     }
   }, []); 
 
   useEffect(() => {
     // This function will handle WebSocket messages
-    const handleWebSocketMessage = (message) => {
+    const handleWebSocketMessage = (message) => { //socket skip private routing
       if (message.action === 'redirect' && message.url)
       {
         if(message.url == '/')
@@ -40,13 +41,14 @@ function AppRoutes() {
     };
 
     if (isAuthenticated && !socketRef.current) {
-      socketRef.current = connectWebSocket(handleWebSocketMessage);  // Connect WebSocket
+      socketRef.current = connectWebSocket(handleWebSocketMessage);  // Connect WebSocket and use callback
       console.log('WebSocket connection established for authenticated user.');
     }
 
   }, [isAuthenticated, Navigate]);
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = () => 
+  {
     console.log('handleLoginSuccess');
     setIsAuthenticated(true);
     localStorage.setItem('isAuthenticated', 'true');
@@ -55,7 +57,7 @@ function AppRoutes() {
 
   const handleLogOutSuccess = () => {
     setIsAuthenticated(false);
-    localStorage.clear();
+    localStorage.clear(); // Clear all local storage
     Navigate('/login');
     if (socketRef.current) {
       closeWebSocket(); 
@@ -66,20 +68,26 @@ function AppRoutes() {
   
   return (
     <>
-      <Header isAuthenticated={isAuthenticated} onLogOutSuccess={handleLogOutSuccess}/>
+      <Header isAuthenticated={isAuthenticated} onLogOutSuccess={handleLogOutSuccess}/> {/* Header controls logout */}
       <Routes>
-        <Route path="/sign-up" element={<SignUpPage />} />
+        
+        <Route
+        path="/sign-up"
+        element={<SignUpPage />}
+        />
+
         <Route
           path="/login"
           element={
             !isAuthenticated ? <LoginPage onLoginSuccess={handleLoginSuccess} /> : <></>
           }
         />
+
         <Route 
-          path="/" 
+          path="/" //not a really page, just a placeholder
           element={
             <PrivateRoute>
-              <HomePage /> {/* HomePage is just a placeholder, this won't actually render because of redirect in PrivateRoute */}
+              <HomePage /> 
             </PrivateRoute>
           } 
         />

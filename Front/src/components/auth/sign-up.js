@@ -15,15 +15,14 @@ const SignUpPage = () => {
     const queryParams = new URLSearchParams(location.search);
     isAdmin = queryParams.get('admin') == '1234'; // for admin sign up
 
-    const handleSubmit = async (event) => {
-    event.preventDefault();
-
+    const handleSubmit = async (event) =>
+    {
+      event.preventDefault();
     if (password !== confirmPassword) 
     {
         alert('Passwords do not match!');
         return;
     }
-
 
     try 
     {
